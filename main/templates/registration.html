@@ -13,7 +13,7 @@
 <body>
     <div class="container">
         <h1>Register to Project Name</h1>
-        <form action="/create_user" method='POST'>
+        <form action="/register_user" method='POST'>
         {% csrf_token %}
         <label for="first_name" class="form-label">First Name:</label>
         <input type="text" class='form-control' name='first_name'>
@@ -22,7 +22,7 @@
         <label for="email" class="form-label">Email:</label>
         <input type="text" class="form-control" name='email'>
         <label for="pw" class="form-label">Password:</label>
-        <input type="password" class="form-control" name='pw'>
+        <input type="password" class="form-control" name='password'>
         <label for="confirm_pw" class="form-label">Confirm Password:</label>
         <input type="password" class="form-control" name='confirm_pw'>
         <button>Register</button>

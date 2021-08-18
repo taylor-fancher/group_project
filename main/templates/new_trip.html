@@ -13,13 +13,13 @@
 <body>
     <div class="container">
         <div class="navigation">
-            <a href="/home">Home</a>
-            <a href="/new_trip">New Trip</a>
-            <a href="/search">Search</a>
+            <a href="/trip">Home</a>
+            <a href="/trip/new">New Trip</a>
+            <a href="/trip/search">Search</a>
         </div>
         <div class="new_trip">
             <h3>Add a new trip:</h3>
-            <form action="/create_trip" method='POST'>
+            <form action="/trip/create" method='POST'>
                 {% csrf_token %}
                 <label for="destination" class="form-label">Destination:</label>
                 <input type="text" class="form-control" name='destination'>

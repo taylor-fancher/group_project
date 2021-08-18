@@ -13,12 +13,12 @@
 <body>
     <div class="container">
         <h1>Project Name</h1>
-        <form action="/login" method='POST'>
+        <form action="/login_user" method='POST'>
             {% csrf_token %}
             <label for="email" class='form-label'>Email:</label>
             <input type="text" name='email' class='form-control'>
             <label for="pw" class="form-label">Password:</label>
-            <input type="password" class="form-control" name='pw'>
+            <input type="password" class="form-control" name='password'>
             <button>Login</button>
         </form>
         <p>Click here to <a href="/register">register.</a></p>
