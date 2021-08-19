@@ -55,7 +55,7 @@ def logout(request):
 def home(request):
     context = {
         'user': User.objects.get(id=request.session['userid']),
-        'trips': user.trip_uploaded.all()
+        'trips': User.trip_uploaded.all()
     }
     return render(request, 'home.html', context)
 
@@ -67,21 +67,22 @@ def create_trip(request):
     if errors: 
         for val in errors.values():
             messages.error(request,val)
+        return redirect('/trip/create')
     else:
-        Trip.objects.create(
+        trip1 = Trip.objects.create(
             destination = request.POST['destination'],
             date_from = request.POST['date_from'],
             date_to = request.POST['date_to'],
             description = request.POST['description'],
             uploaded_by_id = User.objects.get(id=request.session['userid'])
         )
-    return redirect(f'/trip/{trip_id}')
+        return redirect(f'/trip/{trip1.id}')
 
 def trip_info(request, trip_id):
     context = {
         'trip': Trip.objects.get(id=trip_id)
     }
-    request render(request, 'trip.html', context)
+    return render(request, 'trip.html', context)
 
 def search_trip(request):
     context = {
