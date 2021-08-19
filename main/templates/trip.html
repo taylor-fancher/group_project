@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Add a Trip</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <a href="/trip">Home</a>
+            <a href="/trip/new">New Trip</a>
+            <a href="/trip/search">Search</a>
+        </div>
+        <div class="trip">
+            <h2>{{trip.destination}}</h2>
+            <div class="row">
+                <div class="text col-md-6">
+                    <p><a href="/user/{{trip.uploaded_by_id.id}}">{{trip.uploaded_by_id.first_name}} {{trip.uploaded_by_id.last_name}}'s</a> trip to {{trip.destination}}</p>
+                    <p>From: {{trip.date_from}}</p>
+                    <p>To: {{trip.date_to}}</p>
+                    <p>Description: {{trip.description}}</p>
+                    <p><button><a href="/trip/{{trip.id}/edit">Edit</a></button> <button><a href="/trip/{{trip.id}}/delete">Delete</a></button></p>
+                </div>
+                <div class="other col-md-6">
+                    <div class="image">
+                    <img src="" alt="Trip Photo">
+                    <p><a href="/trip/{{trip.id}}/upload_photo">Add Picture</a></p>
+                    </div>
+                    <div class="spotify">
+                        <!-- Placeholder for Spotify API and trip playlist. -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
