@@ -56,6 +56,7 @@ class User(models.Model):
     password = models.CharField(max_length=45)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = UserManager()
 
 class Trip(models.Model):
     destination = models.CharField(max_length=65)
@@ -65,3 +66,4 @@ class Trip(models.Model):
     uploaded_by_id = models.ForeignKey(User, related_name = "trip_uploaded", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    objects = TripManager()
