@@ -55,6 +55,7 @@ def logout(request):
 def home(request):
     context = {
         'user': User.objects.get(id=request.session['userid']),
+        'trips': user.trip_uploaded.all()
     }
     return render(request, 'home.html', context)
 
