@@ -74,6 +74,7 @@ def create_trip(request):
             date_from = request.POST['date_from'],
             date_to = request.POST['date_to'],
             description = request.POST['description'],
+            spotify = request.POST['spotify'],
             uploaded_by_id = User.objects.get(id=request.session['userid'])
         )
         return redirect(f'/trip/{trip1.id}')
