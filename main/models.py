@@ -63,6 +63,7 @@ class Trip(models.Model):
     date_from = models.DateField()
     date_to = models.DateField()
     description = models.TextField()
+    spotify = models.CharField(max_length=255)
     uploaded_by_id = models.ForeignKey(User, related_name = "trip_uploaded", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
