@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Search Results</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <a href="/trip">Home</a>
+            <a href="/trip/new">New Trip</a>
+            <a href="/trip/search">Search</a>
+        </div>
+        <div class="search">
+            <h3>Search</h3>
+            <form action="/search/results" method="POST">
+                {% csrf_token %}
+            <input type="text" name='query' placeholder='Make another search' class="form-control">
+            <button>Search</button>
+            </form>
+        </div>
+        <div class="results">
+            {% if users %}
+            <div class="users">
+                <table class="table">
+                    <thead>
+                        <th>Name</th>
+                        <th>Travels</th>
+                    </thead>
+                    {% for user in users %}
+                    <tbody>
+                        <tr>
+                            <td><a href="/user/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></td>
+                            <td>{{user.trip_uploaded.count}}</td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+            {% if trips %}
+            <div class="trips">
+                <table class="table">
+                    <thead>
+                        <th>Destination</th>
+                        <th>Trip Taken By</th>
+                    </thead>
+                    {% for trip in trips %}
+                    <tbody>
+                        <tr>
+                            <td><a href="/trip/{{trip.id}}">{{trip.destination}}</a></td>
+                            <td><a href="/user/{{trip.uploaded_by_id.id}}">{{trip.uploaded_by_id.first_name}}</a></td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
