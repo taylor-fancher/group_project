@@ -158,7 +158,7 @@ def add_profile_photo(request, user_id):
 
 def profile_upload(request, user_id):
     user = User.objects.get(id=user_id)
-    user.profile_pic.add(request.POST['profile_pic'])
+    user.profile_pic = request.POST['profile_pic']
     user.save()
     return redirect(f'/user/{user_id}')
 
@@ -174,7 +174,7 @@ def update_your_profile(request, user_id):
     if errors: 
         for val in errors.values():
             messages.error(request,val)
-        return redirect(f'/user/{user_id}/edit')
+        #return redirect(f'/user/{user_id}/edit')
     else:
         user = User.objects.get(id=user_id)
         user.first_name = request.POST['first_name']
