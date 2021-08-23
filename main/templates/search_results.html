@@ -19,7 +19,7 @@
         </div>
         <div class="search">
             <h3>Search</h3>
-            <form action="/search/results" method="POST">
+            <form action="/trip/search_query" method="POST">
                 {% csrf_token %}
             <input type="text" name='query' placeholder='Make another search' class="form-control">
             <button>Search</button>

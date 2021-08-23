@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 from .models import User, Trip
+from django.db.models import Q
 
 # Create your views here.
 
@@ -91,6 +92,16 @@ def search_trip(request):
         
     }
     return render(request, 'search.html', context)
+
+def search(request):
+    query = request.POST['query']
+    users = User.objects.filter(Q(first_name__icontains = query) | Q(last_name__icontains = query))
+    trips = Trip.objects.filter(Q(destination__icontains = query))
+    context =  {
+        'users': users,
+        'trips': trips,
+    }
+    return render(request, 'search_results.html', context)
 
 def edit_trip(request, trip_id):
     context = {
