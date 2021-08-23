@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
 from .models import User, Trip
+from django.db.models import Q
 
 # Create your views here.
 
@@ -92,11 +93,33 @@ def search_trip(request):
     }
     return render(request, 'search.html', context)
 
+def search(request):
+    query = request.POST['query']
+    users = User.objects.filter(Q(first_name__icontains = query) | Q(last_name__icontains = query))
+    trips = Trip.objects.filter(Q(destination__icontains = query))
+    context =  {
+        'users': users,
+        'trips': trips,
+    }
+    return render(request, 'search_results.html', context)
+
 def edit_trip(request, trip_id):
     context = {
         'trip': Trip.objects.get(id=trip_id)
     }
     return render(request, 'edit_trip.html', context)
+
+def add_trip_photo(request, trip_id):
+    context = {
+        'trip': Trip.objects.get(id=trip_id),
+    }
+    return render(request, 'trip_upload.html', context)
+
+def trip_upload(request, trip_id):
+    trip = Trip.objects.get(id=trip_id)
+    trip.image.add(request.POST['image'])
+    trip.save()
+    return redirect(f'/trip/{trip.id}')
 
 def update_trip(request, trip_id):
     errors = Trip.objects.validator(request.POST, trip_id)
@@ -124,6 +147,19 @@ def user_profile(request, user_id):
         'user': User.objects.get(id=user_id)
     }
     return render(request, 'user_profile.html', context)
+
+def add_profile_photo(request, user_id):
+    context = {
+        'user': User.objects.get(id=user_id),
+    }
+    return render(request, 'profile_upload.html', context)
+
+def profile_upload(request, user_id):
+    user = User.objects.get(id=user_id)
+    user.profile_pic.add(request.POST['profile_pic'])
+    user.save()
+    return redirect(f'/user/{user_id}')
+
 
 def edit_your_profile(request, user_id):
     context = {
