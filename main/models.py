@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 import re
 
 # Create your models here.
@@ -46,6 +47,8 @@ class TripManager(models.Manager):
             errors['destination'] = "Destination must be at least 3 characters"
         if len(post_data['description']) < 3:
             errors['description'] = "Description must be at least 3 characters"
+        if datetime.strptime(post_data['date_to'], '%Y-%m-%d') < (post_data['date_from'], '%Y-%m-%d'):
+            errors['date_to'] = 'Cannot do past from date'
 
         return errors
 
@@ -54,7 +57,7 @@ class User(models.Model):
     last_name = models.CharField(max_length=45)
     email = models.CharField(max_length=45)
     password = models.CharField(max_length=45)
-    profile_pic = models.ImageField(upload_to='static/photos/users', null=True, blank=True)
+    profile_pic = models.ImageField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
@@ -65,7 +68,7 @@ class Trip(models.Model):
     date_to = models.DateField()
     description = models.TextField()
     spotify = models.CharField(max_length=65)
-    image = models.ImageField(upload_to='static/photos/trips', null=True, blank=True)
+    image = models.ImageField(null=True, blank=True)
     uploaded_by_id = models.ForeignKey(User, related_name = "trip_uploaded", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
