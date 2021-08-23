@@ -1,0 +1,16 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    height: 100%;
+    margin: 0px;
+    background-image: url('/static/img/map_background.jpg');
+    background-size: cover;
+}
+
+h1, .header, label, button, p{
+    font-family: "Federo", sans-serif;
+}
+
