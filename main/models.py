@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 import re
 
 # Create your models here.
@@ -46,6 +47,8 @@ class TripManager(models.Manager):
             errors['destination'] = "Destination must be at least 3 characters"
         if len(post_data['description']) < 3:
             errors['description'] = "Description must be at least 3 characters"
+        if datetime.strptime(post_data['date_to'], '%Y-%m-%d') < (post_data['date_from'], '%Y-%m-%d'):
+            errors['date_to'] = 'Cannot do past from date'
 
         return errors
 
