@@ -19,6 +19,8 @@ urlpatterns = [
     path('user/<int:user_id>/edit', views.edit_your_profile),
     path('user/<int:user_id>/update', views.update_your_profile),
     path('user/<int:user_id>/delete', views.delete_your_profile),
-    path('user/profile/upload', views.profile_upload),
+    path('user/<int:user_id>/upload', views.profile_upload),
+    path('user/<int:user_id>/image', views.add_profile_photo),
     path('trip/<int:trip_id>/upload', views.trip_upload),
+    path('trip/<int:trip_id>/image', views.add_trip_photo)
 ]

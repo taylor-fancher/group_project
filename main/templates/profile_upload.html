@@ -18,8 +18,8 @@
             <a href="/trip/search">Search</a>
         </div>
         <div class="upload">
-            <h2>Add a Profile Photo</h2>
-            <form action="/user/profile/upload" method='POST'>
+            <h2>Add a Profile Photo {{user.first_name}}</h2>
+            <form action="/user/{{user.id}}/upload" method='POST'>
             {% csrf_token %}
             <label for="profile_pic" class="form-label">Choose a Profile Picture</label>
             <input type="file" class="form-control" name='profile_pic' accept='image/png, image/jpeg'>

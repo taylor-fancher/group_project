@@ -21,7 +21,7 @@
             <h2>Add a Photo for your trip to {{trip.destination}}</h2>
             <form action="/trip/{{trip.id}}/upload" method='POST'>
             {% csrf_token %}
-            <label for="image" class="form-label">Choose a Profile Picture</label>
+            <label for="image" class="form-label">Choose a Picture</label>
             <input type="file" class="form-control" name='image' accept='image/png, image/jpeg'>
             <button>Upload</button>
             </form>
