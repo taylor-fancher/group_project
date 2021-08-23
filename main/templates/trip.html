@@ -16,6 +16,7 @@
             <a href="/trip">Home</a>
             <a href="/trip/new">New Trip</a>
             <a href="/trip/search">Search</a>
+            <a href="/logout">Logout</a>
         </div>
         <div class="trip">
             <h2>{{trip.destination}}</h2>
@@ -25,7 +26,7 @@
                     <p>From: {{trip.date_from}}</p>
                     <p>To: {{trip.date_to}}</p>
                     <p>Description: {{trip.description}}</p>
-                    <p><button><a href="/trip/{{trip.id}/edit">Edit</a></button> <button><a href="/trip/{{trip.id}}/delete">Delete</a></button></p>
+                    <p><button><a href="/trip/{{trip.id}}/edit">Edit</a></button> <button><a href="/trip/{{trip.id}}/delete">Delete</a></button></p>
                 </div>
                 <div class="other col-md-6">
                     <div class="image">

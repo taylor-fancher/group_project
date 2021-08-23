@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <title>Add a Trip</title>
+    <title>Edit your Trip</title>
 </head>
 
 <body>
@@ -18,22 +18,23 @@
             <a href="/trip/search">Search</a>
             <a href="/logout">Logout</a>
         </div>
-        <div class="new_trip">
-            <h3>Add a new trip:</h3>
-            <form action="/trip/create" method='POST'>
+        <div class="edit">
+            <h3>Update your Trip</h3>
+            <form action="/trip/{{trip.id}}/update" method='POST'>
                 {% csrf_token %}
                 <label for="destination" class="form-label">Destination:</label>
-                <input type="text" class="form-control" name='destination'>
+                <input type="text" class="form-control" name='destination' value='{{trip.destination}}'>
                 <label for="start_date" class="form-label">From:</label>
-                <input type="date" class='form-control' name='date_from'>
+                <input type="date" class='form-control' name='date_from' value='{{trip.date_from|date:"Y-m-d"}}'>
                 <label for="end_date" class="form-label">To:</label>
-                <input type="date" class="form-control" name='date_to'>
+                <input type="date" class="form-control" name='date_to'value='{{trip.date_to|date:"Y-m-d"}}' >
                 <label for="desc" class="form-label">Description:</label>
-                <input type="text" class='form-control' name='description'>
+                <input type="text" class='form-control' name='description' value='{{trip.description}}'>
                 <label for="spotify" class="form-label">Spotify Playlist:</label>
-                <input type="text" class='form-control' name='spotify'>
-                <p>You'll need the "Playlist ID" of your Spotify playlist (EX: https://open.spotify.com/playlist/[Playlist ID])</p>
-                <button>Create</button>
+                <input type="text" class='form-control' name='spotify' value='{{trip.spotify}}'>
+                <p>You'll need the "Playlist ID" of your Spotify playlist (EX:
+                    https://open.spotify.com/playlist/[Playlist ID])</p>
+                <button>Update</button>
             </form>
         </div>
     </div>

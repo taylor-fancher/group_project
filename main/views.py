@@ -31,7 +31,7 @@ def register_page(request):
     return render(request, 'registration.html')
 
 def register_user(request):
-    errors = User.objects.user_validator(request.POST)
+    errors = User.objects.validator(request.POST)
     if errors:
         for key, val in errors.items():
             messages.error(request,val)
@@ -56,7 +56,7 @@ def logout(request):
 def home(request):
     context = {
         'user': User.objects.get(id=request.session['userid']),
-        'trips': User.trip_uploaded.all()
+        'trips': Trip.objects.filter(uploaded_by_id=request.session['userid'])
     }
     return render(request, 'home.html', context)
 
@@ -88,7 +88,7 @@ def trip_info(request, trip_id):
 
 def search_trip(request):
     context = {
-        'all_trips': Trip.objects.all(),
+        'trips': Trip.objects.all(),
         
     }
     return render(request, 'search.html', context)
@@ -122,17 +122,18 @@ def trip_upload(request, trip_id):
     return redirect(f'/trip/{trip.id}')
 
 def update_trip(request, trip_id):
-    errors = Trip.objects.validator(request.POST, trip_id)
+    errors = Trip.objects.validator(request.POST)
     if errors: 
         for val in errors.values():
             messages.error(request,val)
+        return redirect(f'/trip/{trip_id}/edit')
     else:
         trip = Trip.objects.get(id=trip_id)
         trip.destination = request.POST['destination'],
         trip.date_from = request.POST['date_from'],
         trip.date_to = request.POST['date_to'],
         trip.description = request.POST['description'],
-        trip.uploaded_by_id = User.objects.get(id=request.session['userid'])
+        trip.spotify = request.POST['spotify']
         trip.save()
         messages.success(request, 'Succesfully updated trip!')
     return redirect(f'/trip/{trip_id}')
@@ -144,7 +145,8 @@ def delete_trip(request, trip_id):
 
 def user_profile(request, user_id):
     context = {
-        'user': User.objects.get(id=user_id)
+        'this_user': User.objects.get(id=user_id),
+        'trips': Trip.objects.filter(uploaded_by_id=request.session['userid'])
     }
     return render(request, 'user_profile.html', context)
 
@@ -168,10 +170,11 @@ def edit_your_profile(request, user_id):
     return render(request, 'your_profile.html', context)
 
 def update_your_profile(request, user_id):
-    errors = User.objects.edit_validator(request.POST, user_id)
+    errors = User.objects.edit_validator(request.POST)
     if errors: 
         for val in errors.values():
             messages.error(request,val)
+        return redirect(f'/user/{user_id}/edit')
     else:
         user = User.objects.get(id=user_id)
         user.first_name = request.POST['first_name']
