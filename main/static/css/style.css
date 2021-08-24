@@ -3,14 +3,62 @@
     padding: 0px;
 }
 
-body {
+body.login {
     height: 100%;
     margin: 0px;
-    background-image: url('/static/img/map_background.jpg');
+    background-image: url('/static/img/map.png');
     background-size: cover;
+    font-family: "Federo", sans-serif;
 }
 
-h1, .header, label, button, p{
+body.home {
+    background-image:radial-gradient(rgb(152, 116, 79, 0.5), rgb(192, 167, 127, 0.5), rgb(194, 180, 141, 0.5));
     font-family: "Federo", sans-serif;
+    color: rgb(31, 51, 61);
+}
+
+h1, .login_font, label, p, th, td{
+    
+    color: rgb(31, 51, 61);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color:rgb(29, 215, 240);
+}
+
+.style, button {
+    background-color:rgb(31, 51, 61);
+    border-radius: 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: none;
+    margin-top: 5px;
+    color:white;
+    
+}
+
+.trips{
+    margin-top: 10px;
+}
+
+.navigation{
+    text-align: right;
+}
+
+table.table{
+    border-bottom: 1px solid rgb(31, 51, 61);
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+tr:nth-child(even) {
+    background-color: rgb(152, 116, 79);
 }
 
