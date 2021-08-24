@@ -69,7 +69,7 @@ def create_trip(request):
     if errors: 
         for val in errors.values():
             messages.error(request,val)
-        return redirect('/trip/create')
+        return redirect('/trip/new')
     else:
         trip1 = Trip.objects.create(
             destination = request.POST['destination'],
