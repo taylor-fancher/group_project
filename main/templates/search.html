@@ -7,38 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo">
     <title>Search</title>
 </head>
 
-<body>
+<body class="home">
     <div class="container">
         <div class="navigation">
-            <a href="/trip">Home</a>
-            <a href="/trip/new">New Trip</a>
-            <a href="/trip/search">Search</a>
-            <a href="/logout">Logout</a>
+            <button class="style"><a href="/trip">Home</a></button>
+            <button class="style"><a href="/trip/new">New Trip</a></button>
+            <button class="style"><a href="/trip/search">Search</a></button>
+            <button class="style"><a href="/logout">Logout</a></button>
         </div>
-        <div class="search">
+        <div class="row">
+            <div class="col-md-5">
             <h3>Search</h3>
             <form action="/trip/search_query" method="POST">
                 {% csrf_token %}
             <input type="text" name='query' placeholder='Search by user or destination' class="form-control">
             <button>Search</button>
             </form>
+            </div>
         </div>
         <div class="results">
-            <table>
+            <table class="table">
                 <thead>
                     <th>User</th>
                     <th>Destination</th>
-                    <th>Actions</th>
+                    <th style="text-align: right">Actions</th>
                 </thead>
                 {% for trip in trips %}
                 <tbody>
                     <tr>
                         <td><a href="/user/{{trip.uploaded_by_id.id}}">{{trip.uploaded_by_id.first_name}}</a></td>
                         <td>{{trip.destination}}</td>
-                        <td>
+                        <td style="text-align: right">
                             <a href="/trip/{{trip.id}}">View</a>
                             {% if trip.uploaded_by_id.id == user.id %}
                             <a href="/trip/{{trip.id}}/edit">Edit</a>
