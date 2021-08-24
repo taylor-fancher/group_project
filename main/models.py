@@ -22,6 +22,8 @@ class UserManager(models.Manager):
             errors['password'] = "Password has to be more then 8 characters"
         if post_data['password'] != post_data['confirm_pw']:
             errors['confirm_pw'] = "Password do not match"
+        
+        return errors
 
     def edit_validator(self, post_data):
         errors = {}
