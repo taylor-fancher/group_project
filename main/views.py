@@ -35,6 +35,7 @@ def register_user(request):
     if errors:
         for key, val in errors.items():
             messages.error(request,val)
+        return redirect('/register')
     elif request.method=="POST":
         password = request.POST['password']
         pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
@@ -187,4 +188,5 @@ def update_your_profile(request, user_id):
 def delete_your_profile(request, user_id):
     delete_user = User.objects.get(id=user_id)
     delete_user.delete()
+    request.session.clear()
     return redirect('/')
