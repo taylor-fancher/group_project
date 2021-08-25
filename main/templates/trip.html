@@ -22,7 +22,8 @@
             <button><a href="/trip/search">Search</a></button>
             <button><a href="/logout">Logout</a></button>
         </div>
-        <div class="trip">
+        <div class="row justify-content-center" style="margin-top: 40px">
+            <div class="col-md-4">
             <h2 id="destination">{{trip.destination}}</h2>
             {% if messages %}
                 <ul>
@@ -31,24 +32,22 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-            <div class="row">
-                <div class="text col-md-6">
-                    <p><a href="/user/{{trip.uploaded_by_id.id}}">{{trip.uploaded_by_id.first_name}}
-                            {{trip.uploaded_by_id.last_name}}'s</a> trip to {{trip.destination}}</p>
-                    <p>From: {{trip.date_from}}</p>
-                    <p>To: {{trip.date_to}}</p>
-                    <p>Description: {{trip.description}}</p>
-                    <p><button><a href="/trip/{{trip.id}}/edit">Edit</a></button> <button><a
-                                href="/trip/{{trip.id}}/delete">Delete</a></button></p>
-                </div>
+                <p><a href="/user/{{trip.uploaded_by_id.id}}">{{trip.uploaded_by_id.first_name}}
+                {{trip.uploaded_by_id.last_name}}'s</a> trip to {{trip.destination}}</p>
+                <p>From: {{trip.date_from}}</p>
+                <p>To: {{trip.date_to}}</p>
+                <p>Description: {{trip.description}}</p>
+                <p><button><a href="/trip/{{trip.id}}/edit">Edit</a></button> <button><a
+                href="/trip/{{trip.id}}/delete">Delete</a></button></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Location:</h2>
                 {%include "partials/map.html"%}
-                <div class="other col-md-6">
-                    <div class="spotify">
-                        <p>Spotify Playlist</p>
-                        <iframe src="https://open.spotify.com/embed/playlist/{{trip.spotify}}" width="300" height="380"
-                            frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                    </div>
-                </div>
+            </div>           
+            <div class="col-md-4">
+                <h2>Spotify Playlist:</h2>
+                <iframe src="https://open.spotify.com/embed/playlist/{{trip.spotify}}" width="360" height="300"
+                frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
             </div>
         </div>
     </div>

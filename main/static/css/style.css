@@ -57,8 +57,3 @@ table.table{
     margin-right: auto;
     margin-top: 20px;
 }
-
-tr:nth-child(even) {
-    background-color: rgb(152, 116, 79);
-}
-
