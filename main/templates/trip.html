@@ -38,8 +38,9 @@
                     <p>From: {{trip.date_from}}</p>
                     <p>To: {{trip.date_to}}</p>
                     <p>Description: {{trip.description}}</p>
-                    <p><button><a href="/trip/{{trip.id}}/edit">Edit</a></button> <button><a
-                                href="/trip/{{trip.id}}/delete">Delete</a></button></p>
+                    {% if user.id == trip.uploaded_by_id.id %}
+                    <p><button><a href="/trip/{{trip.id}}/edit">Edit</a></button> <button><a href="/trip/{{trip.id}}/delete">Delete</a></button></p>
+                    {% endif %}
                 </div>
                 {%include "partials/map.html"%}
                 <div class="other col-md-6">
