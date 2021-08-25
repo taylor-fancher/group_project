@@ -130,10 +130,10 @@ def update_trip(request, trip_id):
         return redirect(f'/trip/{trip_id}/edit')
     else:
         trip = Trip.objects.get(id=trip_id)
-        trip.destination = request.POST['destination'],
-        trip.date_from = request.POST['date_from'],
-        trip.date_to = request.POST['date_to'],
-        trip.description = request.POST['description'],
+        trip.destination = request.POST['destination']
+        trip.date_from = request.POST['date_from']
+        trip.date_to = request.POST['date_to']
+        trip.description = request.POST['description']
         trip.spotify = request.POST['spotify']
         trip.save()
         messages.success(request, 'Succesfully updated trip!')
@@ -175,7 +175,7 @@ def update_your_profile(request, user_id):
     if errors: 
         for val in errors.values():
             messages.error(request,val)
-        #return redirect(f'/user/{user_id}/edit')
+        return redirect(f'/user/{user_id}/edit')
     else:
         user = User.objects.get(id=user_id)
         user.first_name = request.POST['first_name']
