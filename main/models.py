@@ -21,22 +21,35 @@ class UserManager(models.Manager):
             errors['password'] = "Password has to be more then 8 characters"
         if post_data['password'] != post_data['confirm_pw']:
             errors['confirm_pw'] = "Password do not match"
+        return errors
 
-    def edit_validator(self, post_data):
+    def edit_validator(self, post_data, user_id):
         errors = {}
-        if len(post_data['first_name']) < 3:
-            errors['first_name'] = "First name must be at least 3 characters"
-        if len(post_data['last_name']) < 3:
-            errors['last_name'] = "Last name must be at least 3 characters"
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-z]+$')
         users = User.objects.filter(email=post_data['email'])
         if users:
-            errors['existing_user'] = "E-mail already in use"
-        if not EMAIL_REGEX.match(post_data['email']):           
-            errors['email'] = "Please enter valid e-mail address"
-        if len(post_data['email']) < 1:
-            errors['email'] = "E-mail cannot be blank"
-
+            my_user = User.objects.get(id=user_id)
+            if my_user.email != users[0].email:
+                errors['existing_user'] = "E-mail already in use"
+            else: 
+                EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-z]+$')
+                if not EMAIL_REGEX.match(post_data['email']):           
+                    errors['email'] = "Please enter valid e-mail address"
+                if len(post_data['email']) < 1:
+                    errors['email'] = "E-mail cannot be blank"
+                if len(post_data['first_name']) < 3:
+                    errors['first_name'] = "First name must be at least 3 characters"
+                if len(post_data['last_name']) < 3:
+                    errors['last_name'] = "Last name must be at least 3 characters"
+        else:
+            EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-z]+$')
+            if not EMAIL_REGEX.match(post_data['email']):           
+                errors['email'] = "Please enter valid e-mail address"
+            if len(post_data['email']) < 1:
+                errors['email'] = "E-mail cannot be blank"
+            if len(post_data['first_name']) < 3:
+                errors['first_name'] = "First name must be at least 3 characters"
+            if len(post_data['last_name']) < 3:
+                errors['last_name'] = "Last name must be at least 3 characters"
         return errors
 
 class TripManager(models.Manager):
@@ -46,7 +59,6 @@ class TripManager(models.Manager):
             errors['destination'] = "Destination must be at least 3 characters"
         if len(post_data['description']) < 3:
             errors['description'] = "Description must be at least 3 characters"
-
         return errors
 
 class User(models.Model):

@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import bcrypt
-from .models import User, Trip
-from django.db.models import Q
+from .models import *
 
 # Create your views here.
 
@@ -31,7 +30,7 @@ def register_page(request):
     return render(request, 'registration.html')
 
 def register_user(request):
-    errors = User.objects.validator(request.POST)
+    errors = User.objects.validator(request.POST) 
     if errors:
         for key, val in errors.items():
             messages.error(request,val)
@@ -47,7 +46,7 @@ def register_user(request):
         request.session['userid'] = user.id
         messages.success(request, 'Succesfully registered account!')
         return redirect('/trip')
-    return redirect('/')
+    return redirect('/register')
 
 def logout(request):
     request.session.flush()
@@ -170,11 +169,10 @@ def edit_your_profile(request, user_id):
     return render(request, 'your_profile.html', context)
 
 def update_your_profile(request, user_id):
-    errors = User.objects.edit_validator(request.POST)
+    errors = User.objects.edit_validator(request.POST, user_id)
     if errors: 
         for val in errors.values():
             messages.error(request,val)
-        return redirect(f'/user/{user_id}/edit')
     else:
         user = User.objects.get(id=user_id)
         user.first_name = request.POST['first_name']
@@ -186,5 +184,5 @@ def update_your_profile(request, user_id):
 
 def delete_your_profile(request, user_id):
     delete_user = User.objects.get(id=user_id)
-    delete_user.delete()
+    delete_user.request.session.clear()
     return redirect('/')
