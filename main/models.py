@@ -31,14 +31,6 @@ class UserManager(models.Manager):
             errors['first_name'] = "First name must be at least 3 characters"
         if len(post_data['last_name']) < 3:
             errors['last_name'] = "Last name must be at least 3 characters"
-        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-z]+$')
-        users = User.objects.filter(email=post_data['email'])
-        if users:
-            my_user = User.objects.get(id=user_id)
-            if my_user.email != users[0].email:
-                errors['existing_user'] = "E-mail already in use"
-        if not EMAIL_REGEX.match(post_data['email']):           
-            errors['email'] = "Please enter valid e-mail address"
         if len(post_data['email']) < 1:
             errors['email'] = "E-mail cannot be blank"
 
