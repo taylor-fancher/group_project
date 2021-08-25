@@ -22,9 +22,16 @@
             <button class="style"><a href="/logout">Logout</a></button>
         </div>
         <div class="welcome">
-            <img src="{{user.profile_pic}}" alt="Your Profile Image">
             <button class="style"><a href="/user/{{user.id}}/edit">Edit Profile</a></button>
         </div>
+        <h1>Hello {{user.first_name}}</h1>
+        {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
         <div class="trips" >
             <h4 style="text-align: center">Your Trips:</h4>
             <table class="table">

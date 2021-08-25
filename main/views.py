@@ -110,17 +110,6 @@ def edit_trip(request, trip_id):
     }
     return render(request, 'edit_trip.html', context)
 
-def add_trip_photo(request, trip_id):
-    context = {
-        'trip': Trip.objects.get(id=trip_id),
-    }
-    return render(request, 'trip_upload.html', context)
-
-def trip_upload(request, trip_id):
-    trip = Trip.objects.get(id=trip_id)
-    trip.image.add(request.POST['image'])
-    trip.save()
-    return redirect(f'/trip/{trip.id}')
 
 def update_trip(request, trip_id):
     errors = Trip.objects.validator(request.POST)
@@ -150,18 +139,6 @@ def user_profile(request, user_id):
         'trips': Trip.objects.filter(uploaded_by_id=request.session['userid'])
     }
     return render(request, 'user_profile.html', context)
-
-def add_profile_photo(request, user_id):
-    context = {
-        'user': User.objects.get(id=user_id),
-    }
-    return render(request, 'profile_upload.html', context)
-
-def profile_upload(request, user_id):
-    user = User.objects.get(id=user_id)
-    user.profile_pic = request.POST['profile_pic']
-    user.save()
-    return redirect(f'/user/{user_id}')
 
 
 def edit_your_profile(request, user_id):
