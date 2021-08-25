@@ -25,7 +25,7 @@ class UserManager(models.Manager):
         
         return errors
 
-    def edit_validator(self, post_data):
+    def edit_validator(self, post_data, user_id):
         errors = {}
         if len(post_data['first_name']) < 3:
             errors['first_name'] = "First name must be at least 3 characters"
@@ -45,7 +45,6 @@ class TripManager(models.Manager):
             errors['description'] = "Description must be at least 3 characters"
         if datetime.strptime(post_data['date_to'], '%Y-%m-%d') < datetime.strptime(post_data['date_from'], '%Y-%m-%d'):
             errors['date_to'] = 'Cannot do past from date'
-
         return errors
 
 class User(models.Model):
