@@ -1,7 +1,5 @@
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.login_page),
@@ -27,5 +25,3 @@ urlpatterns = [
     path('trip/<int:trip_id>/upload', views.trip_upload),
     path('trip/<int:trip_id>/image', views.add_trip_photo)
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
