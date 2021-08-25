@@ -83,6 +83,7 @@ def create_trip(request):
 
 def trip_info(request, trip_id):
     context = {
+        'user': User.objects.get(id=request.session['userid']),
         'trip': Trip.objects.get(id=trip_id)
     }
     return render(request, 'trip.html', context)
@@ -136,7 +137,7 @@ def delete_trip(request, trip_id):
 def user_profile(request, user_id):
     context = {
         'this_user': User.objects.get(id=user_id),
-        'trips': Trip.objects.filter(uploaded_by_id=request.session['userid'])
+        'trips': Trip.objects.filter(uploaded_by_id=User.objects.get(id=user_id))
     }
     return render(request, 'user_profile.html', context)
 
