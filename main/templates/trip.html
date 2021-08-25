@@ -7,16 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo">
     <title>Add a Trip</title>
 </head>
 
-<body>
+<body class="home">
     <div class="container">
         <div class="navigation">
-            <a href="/trip">Home</a>
-            <a href="/trip/new">New Trip</a>
-            <a href="/trip/search">Search</a>
-            <a href="/logout">Logout</a>
+            <button><a href="/trip">Home</a></button>
+            <button><a href="/trip/new">New Trip</a></button>
+            <button><a href="/trip/search">Search</a></button>
+            <button><a href="/logout">Logout</a></button>
         </div>
         <div class="trip">
             <h2>{{trip.destination}}</h2>
@@ -35,7 +38,7 @@
                     </div>
                     <div class="spotify">
                         <p>Spotify Playlist</p>
-                        <iframe src="https://open.spotify.com/embed/playlist/{trip.spotify}}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                        <iframe src="https://open.spotify.com/embed/playlist/{{trip.spotify}}" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                     </div>
                 </div>
             </div>

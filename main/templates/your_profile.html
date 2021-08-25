@@ -7,20 +7,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo">
     <title>Your Profile</title>
 </head>
 
-<body>
+<body class="home">
     <div class="container">
         <div class="navigation">
-            <a href="/trip">Home</a>
-            <a href="/trip/new">New Trip</a>
-            <a href="/trip/search">Search</a>
-            <a href="/logout">Logout</a>
+            <button class="style"><a href="/trip">Home</a></button>
+            <button class="style"><a href="/trip/new">New Trip</a></button>
+            <button class="style"><a href="/trip/search">Search</a></button>
+            <button class="style"><a href="/logout">Logout</a></button>
         </div>
         <h3>Update your information</h3>
         <div class="row">
             <div class="update col-md-6">
+                {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                    <li>{{message}}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                 <form action="/user/{{user.id}}/update" method='POST'>
                 {% csrf_token %}
                 <label for="first_name" class="form-label">First Name:</label>

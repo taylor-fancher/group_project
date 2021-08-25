@@ -7,35 +7,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Federo">
     <title>{{this_user.first_name}}'s Profile</title>
 </head>
 
-<body>
+<body class="home">
     <div class="container">
         <div class="navigation">
-            <a href="/trip">Home</a>
-            <a href="/trip/new">New Trip</a>
-            <a href="/trip/search">Search</a>
-            <a href="/logout">Logout</a>
+            <button class="style"><a href="/trip">Home</a></button>
+            <button class="style"><a href="/trip/new">New Trip</a></button>
+            <button class="style"><a href="/trip/search">Search</a></button>
+            <button class="style"><a href="/logout">Logout</a></button>
         </div>
         <div class="info">
             <h1>{{this_user.first_name}} {{this_user.last_name}}</h1>
-            <img src="" alt="User's profile picture">
+            <img src="{{this_user.profile_pic.url}}" alt="User's profile picture">
         </div>
         <div class="trips">
-            <p>{{this_user.first_name}}'s Trips:</p>
+            <p style="text-align: center">{{this_user.first_name}}'s Trips:</p>
             <table class="table">
                 <thead>
                     <th>Destination</th>
                     <th>From</th>
-                    <th>To</th>
+                    <th style="text-align: right">To</th>
                 </thead>
                 {% for trip in trips %}
                 <tbody>
                     <tr>
                         <td><a href="/trip/{{trip.id}}">{{trip.destination}}</a></td>
                         <td>{{trip.date_from}}</td>
-                        <td>{{trip.date_to}}</td>
+                        <td style="text-align: right">{{trip.date_to}}</td>
                     </tr>
                 </tbody>
                 {% endfor %}
