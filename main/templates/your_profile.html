@@ -21,13 +21,15 @@
             <button class="style"><a href="/trip/search">Search</a></button>
             <button class="style"><a href="/logout">Logout</a></button>
         </div>
-        <h3>Update your information</h3>
-        <div class="row">
+        
+        <div class="row justify-content-center">
+            
             <div class="update col-md-6">
+            <h3>Update your information</h3>    
                 {% if messages %}
                 <ul>
                     {% for message in messages %}
-                    <li>{{message}}</li>
+                    <li style="color: rgb(29, 215, 240)">{{message}}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}
@@ -41,9 +43,11 @@
                 <input type="text" class="form-control" name='email' value='{{user.email}}'>
                 <button type='submit'>Update</button>
                 </form>
-                <p>Delete Your Account</p>
-                <p>Warning! Clicking below will delete your account and all trips.</p>
+                <div style="margin-top: 20px">
+                <h3>Delete Your Account</h3>
+                <h5>Warning! Clicking below will delete your account and all trips.</h5>
                 <button><a href="/user/{{user.id}}/delete">Delete</a></button>
+                </div>
             </div>
         </div>
     </div>
