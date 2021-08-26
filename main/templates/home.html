@@ -22,8 +22,6 @@
             <button class="style"><a href="/logout">Logout</a></button>
         </div>
         <div class="welcome">
-            <button class="style"><a href="/user/{{user.id}}/edit">Edit Profile</a></button>
-        </div>
         <h1>Hello {{user.first_name}}</h1>
         {% if messages %}
                 <ul>
@@ -32,6 +30,8 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
+        <button class="style"><a href="/user/{{user.id}}/edit">Edit Profile</a></button> 
+        </div>       
         <div class="trips" >
             <h4 style="text-align: center">Your Trips:</h4>
             <table class="table">
