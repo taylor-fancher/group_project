@@ -43,9 +43,11 @@
                 <input type="text" class="form-control" name='email' value='{{user.email}}'>
                 <button type='submit'>Update</button>
                 </form>
-                <p>Delete Your Account</p>
-                <p>Warning! Clicking below will delete your account and all trips.</p>
+                <div style="margin-top: 20px">
+                <h3>Delete Your Account</h3>
+                <h5>Warning! Clicking below will delete your account and all trips.</h5>
                 <button><a href="/user/{{user.id}}/delete">Delete</a></button>
+                </div>
             </div>
         </div>
     </div>
